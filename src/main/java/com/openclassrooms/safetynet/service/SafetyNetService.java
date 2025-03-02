@@ -12,7 +12,7 @@ import com.openclassrooms.safetynet.repository.LoadJson;
 
 @Service
 public class SafetyNetService {
-    LoadJson loadJson;
+    private final LoadJson loadJson;
 
     @Autowired
     public SafetyNetService(LoadJson loadJson){

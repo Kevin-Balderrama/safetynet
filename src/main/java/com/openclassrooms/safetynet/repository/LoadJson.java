@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
@@ -17,21 +17,22 @@ import com.openclassrooms.safetynet.model.FireStation;
 import com.openclassrooms.safetynet.model.MedicalRecord;
 import com.openclassrooms.safetynet.model.Person;
 
-@Service
+@Repository
 public class LoadJson {
     private List<FireStation> fireStations = new ArrayList<>();;
     private final List<Person> persons = new ArrayList<>();;
     private final List<MedicalRecord> medicalRecords = new ArrayList<>();
-    private final String filePath;
+    private final String filePath = "src/main/resources/data.json";
        
-    public LoadJson(String filePath) throws IOException {
+    public LoadJson() throws IOException {
+        /*
         if(filePath.isEmpty()){
             this.filePath = "src/main/resources/data.json";
         }
         else{
             this.filePath = filePath;
         }
-        
+        */
         byte[] bytesFile = Files.readAllBytes(new File(this.filePath).toPath());
         
         JsonIterator iter = JsonIterator.parse(bytesFile);
