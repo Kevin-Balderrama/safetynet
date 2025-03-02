@@ -16,23 +16,22 @@ public class SafetyNetController {
 	public SafetyNetController(SafetyNetService safetyNetService){
 		super();
 		this.safetyNetService = safetyNetService;
-		System.out.println("Get People:\n"+safetyNetService.getAllPersons());
-		System.out.println("Get FireStation:\n"+safetyNetService.getAllFireStations());
-		System.out.println("Get MedicalRecords:\n"+safetyNetService.getAllMedicalRecords());
 	}
 
 	@GetMapping("/safetynet")
 	public String person() {
 		//pulling JSON
-		
+		System.out.println("Get People:\n"+safetyNetService.getAllPersons());
 		return "person!";
 	}
 	@GetMapping("/firestation")
     public String firestation() {
-        return "firestation!";
+        System.out.println("Get FireStation:\n"+safetyNetService.getAllFireStations());
+		return "firestation!";
     }
 	@GetMapping("/medicalRecord")
     public String medicalRecord() {
-        return "medicalRecord!";
+		System.out.println("Get MedicalRecords:\n"+safetyNetService.getAllMedicalRecords());
+		return "medicalRecord!";
     }
 }
