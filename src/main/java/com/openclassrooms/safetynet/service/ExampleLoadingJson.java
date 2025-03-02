@@ -1,3 +1,4 @@
+/**
 package com.openclassrooms.safetynet.service;
 
 import java.io.File;
@@ -15,7 +16,6 @@ import com.openclassrooms.safetynet.model.FireStation;
 import com.openclassrooms.safetynet.model.Person;
 
 public class ExampleLoadingJson {
-
     public static void main(String[] args) throws IOException {        
        String filePath = "src/main/resources/data.json";
     	byte[] bytesFile = Files.readAllBytes(new File(filePath).toPath());
@@ -64,4 +64,6 @@ public class ExampleLoadingJson {
     			allergies.forEach(a -> System.out.println(a.toString()));
     	});
     }
-}
+
+	
+}*/
