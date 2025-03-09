@@ -1,6 +1,5 @@
 package com.openclassrooms.safetynet.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +11,7 @@ import com.openclassrooms.safetynet.service.SafetyNetService;
 public class SafetyNetController {
 	private final SafetyNetService safetyNetService;
 
-	@Autowired
+	//@Autowired
 	public SafetyNetController(SafetyNetService safetyNetService){
 		super();
 		this.safetyNetService = safetyNetService;

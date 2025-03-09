@@ -24,19 +24,17 @@ public class LoadJson {
     private final List<MedicalRecord> medicalRecords = new ArrayList<>();
     private final String filePath = "src/main/resources/data.json";
        
-    public LoadJson() throws IOException {
-        /*
-        if(filePath.isEmpty()){
-            this.filePath = "src/main/resources/data.json";
-        }
-        else{
-            this.filePath = filePath;
-        }
-        */
+    public LoadJson(){
+        Any any = null;
+        try {
         byte[] bytesFile = Files.readAllBytes(new File(this.filePath).toPath());
         
         JsonIterator iter = JsonIterator.parse(bytesFile);
-        Any any = iter.readAny();
+        
+        
+            any = iter.readAny();
+        } catch (IOException ex) {
+        }
         //persons
         Any personAny = any.get("persons");
         
@@ -48,6 +46,8 @@ public class LoadJson {
                 .zip(a.get("zip").toString())
                 .email(a.get("email").toString())
                 .build()));
+        persons.forEach(b -> System.out.println(b.firstName + b.lastName));        
+
         //fireStations
         Map<String, FireStation> fireStationMap = new HashMap<>();
         Any fireStationAny = any.get("firestations");
@@ -58,16 +58,17 @@ public class LoadJson {
                             v.addAddress(anyStation.get("address").toString()));
         });
         this.fireStations = fireStationMap.values().stream().collect(Collectors.toList());
+        fireStations.forEach(b -> System.out.println(b.getStationNumber())); 
         //medicalRecords
         //List<MedicalRecord> medicalRecords = new ArrayList<>();
         Any medicalAny = any.get("medicalrecords");
     	medicalAny.forEach(medicalRecord -> {System.out.println(medicalRecord.get("firstName").toString().concat(medicalRecord.get("lastName").toString())
     			.concat(medicalRecord.get("birthdate").toString()));
     			Any medications = medicalRecord.get("medications");
-    			medications.forEach(a -> System.out.println(a.toString()));
+    			//medications.forEach(a -> System.out.println(a.toString()));
     			
     			Any allergies = medicalRecord.get("allergies");
-    			allergies.forEach(a -> System.out.println(a.toString()));
+    			//allergies.forEach(a -> System.out.println(a.toString()));
     	});
     }
 

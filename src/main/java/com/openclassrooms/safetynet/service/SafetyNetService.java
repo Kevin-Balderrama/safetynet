@@ -2,7 +2,6 @@ package com.openclassrooms.safetynet.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.safetynet.model.FireStation;
@@ -14,7 +13,7 @@ import com.openclassrooms.safetynet.repository.LoadJson;
 public class SafetyNetService {
     private final LoadJson loadJson;
 
-    @Autowired
+    //@Autowired
     public SafetyNetService(LoadJson loadJson){
         this.loadJson = loadJson;
     }
