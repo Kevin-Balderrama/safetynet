@@ -17,11 +17,12 @@ public class SafetyNetController {
 		this.safetyNetService = safetyNetService;
 	}
 
-	@GetMapping("/safetynet")
+	@GetMapping("/person")
 	public String person() {
 		//pulling JSON
-		System.out.println("Get People:\n"+safetyNetService.getAllPersons());
-		return "person!";
+		String x = "Get People:\n"+safetyNetService.getAllPersons();
+		System.out.println(x);
+		return x;
 	}
 	@GetMapping("/firestation")
     public String firestation() {
