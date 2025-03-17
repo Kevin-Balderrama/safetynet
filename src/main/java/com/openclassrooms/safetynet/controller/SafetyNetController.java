@@ -1,8 +1,13 @@
 package com.openclassrooms.safetynet.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.safetynet.model.FireStation;
+import com.openclassrooms.safetynet.model.MedicalRecord;
+import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.service.SafetyNetService;
 
 
@@ -18,20 +23,16 @@ public class SafetyNetController {
 	}
 
 	@GetMapping("/person")
-	public String person() {
+	public List<Person> person() {
 		//pulling JSON
-		String x = "Get People:\n"+safetyNetService.getAllPersons();
-		System.out.println(x);
-		return x;
+		return safetyNetService.getAllPersons();
 	}
 	@GetMapping("/firestation")
-    public String firestation() {
-        System.out.println("Get FireStation:\n"+safetyNetService.getAllFireStations());
-		return "firestation!";
+    public List<FireStation> firestation() {
+		return safetyNetService.getAllFireStations();
     }
 	@GetMapping("/medicalRecord")
-    public String medicalRecord() {
-		System.out.println("Get MedicalRecords:\n"+safetyNetService.getAllMedicalRecords());
-		return "medicalRecord!";
+    public List<MedicalRecord> medicalRecord() {
+		return safetyNetService.getAllMedicalRecords();
     }
 }
