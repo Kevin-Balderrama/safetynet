@@ -51,7 +51,7 @@ public class LoadJson {
         //fireStations
         Map<String, FireStation> fireStationMap = new HashMap<>();
         Any fireStationAny = any.get("firestations");
-        fireStationAny.forEach(anyStation -> { 
+        fireStationAny.forEach(anyStation -> {
             fireStationMap.compute(anyStation.get("station").toString(), 
                     (_, v) -> v == null ?
                             new FireStation(anyStation.get("station").toString()).addAddress(anyStation.get("address").toString()) :
@@ -60,16 +60,20 @@ public class LoadJson {
         this.fireStations = fireStationMap.values().stream().collect(Collectors.toList());
         fireStations.forEach(b -> System.out.println(b.getStationNumber())); 
         //medicalRecords
-        //List<MedicalRecord> medicalRecords = new ArrayList<>();
         Any medicalAny = any.get("medicalrecords");
-    	medicalAny.forEach(medicalRecord -> {System.out.println(medicalRecord.get("firstName").toString().concat(medicalRecord.get("lastName").toString())
-    			.concat(medicalRecord.get("birthdate").toString()));
-    			Any medications = medicalRecord.get("medications");
-    			//medications.forEach(a -> System.out.println(a.toString()));
-    			
-    			Any allergies = medicalRecord.get("allergies");
-    			//allergies.forEach(a -> System.out.println(a.toString()));
-    	});
+    	medicalAny.forEach(medicalRecord -> {
+            Any allergiesAny = medicalRecord.get("allergies");
+            List<String> allergiesList = new ArrayList<>();
+            allergiesAny.forEach(allergy -> allergiesList.add(allergy.toString()));
+            String[] allergiesArray = allergiesList.toArray(String[]::new);
+            
+            Any medicationsAny = medicalRecord.get("medications");
+            List<String> medicationsList = new ArrayList<>();
+            allergiesAny.forEach(medication -> medicationsList.add(medication.toString()));
+            String[] medicationsArray = medicationsList.toArray(String[]::new);
+            
+            medicalRecords.add(new MedicalRecord(allergiesArray, medicalRecord.get("birthdate").toString(), medicalRecord.get("firstName").toString(), medicalRecord.get("lastName").toString(), medicationsArray));
+        });
     }
 
     public List<FireStation> getFireStations() {
