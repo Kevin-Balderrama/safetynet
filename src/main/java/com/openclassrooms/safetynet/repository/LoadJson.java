@@ -19,8 +19,8 @@ import com.openclassrooms.safetynet.model.Person;
 
 @Repository
 public class LoadJson {
-    private List<FireStation> fireStations = new ArrayList<>();;
-    private final List<Person> persons = new ArrayList<>();;
+    private List<FireStation> fireStations = new ArrayList<>();
+    private final List<Person> persons = new ArrayList<>();
     private final List<MedicalRecord> medicalRecords = new ArrayList<>();
     private final String filePath = "src/main/resources/data.json";
        
@@ -69,7 +69,7 @@ public class LoadJson {
             
             Any medicationsAny = medicalRecord.get("medications");
             List<String> medicationsList = new ArrayList<>();
-            allergiesAny.forEach(medication -> medicationsList.add(medication.toString()));
+            medicationsAny.forEach(medication -> medicationsList.add(medication.toString()));
             String[] medicationsArray = medicationsList.toArray(String[]::new);
             
             medicalRecords.add(new MedicalRecord(allergiesArray, medicalRecord.get("birthdate").toString(), medicalRecord.get("firstName").toString(), medicalRecord.get("lastName").toString(), medicationsArray));
