@@ -16,8 +16,6 @@ import com.openclassrooms.safetynet.model.FireStation;
 import com.openclassrooms.safetynet.model.MedicalRecord;
 import com.openclassrooms.safetynet.model.Person;
 
-import jakarta.annotation.PostConstruct;
-
 @Repository
 public class LoadJson {
 
@@ -27,10 +25,10 @@ public class LoadJson {
     private final String filePath = "data.json";
 
     public LoadJson() {
+        // Load JSON data directly in constructor
         loadJsonData();
     }
 
-    @PostConstruct
     private void loadJsonData() {
         try {
             byte[] bytesFile = Files.readAllBytes(new ClassPathResource(filePath).getFile().toPath());
