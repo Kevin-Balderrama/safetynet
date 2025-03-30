@@ -32,10 +32,6 @@ public class SafetyNetController {
 	@GetMapping("/firestation")
     public List<FireStation> firestation(@RequestParam(name = "stationNumber") int stationNumber) {
 		List<FireStation> allStations = safetyNetService.getAllFireStations();
-		//List<FireStation> matchingStations = allStations.forEach(station -> {
-        //        if (station.getStationNumber()==stationNumber) {
-        //            ;
-        //        })
 		return allStations.stream().filter(station -> Integer.parseInt(station.getStationNumber()) == stationNumber).collect(Collectors.toList());
     }
 	@GetMapping("/medicalRecord")
