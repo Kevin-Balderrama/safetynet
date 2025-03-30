@@ -1,8 +1,10 @@
 package com.openclassrooms.safetynet.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.safetynet.model.FireStation;
@@ -28,11 +30,17 @@ public class SafetyNetController {
 		return safetyNetService.getAllPersons();
 	}
 	@GetMapping("/firestation")
-    public List<FireStation> firestation() {
-		return safetyNetService.getAllFireStations();
+    public List<FireStation> firestation(@RequestParam(name = "stationNumber") int stationNumber) {
+		List<FireStation> allStations = safetyNetService.getAllFireStations();
+		//List<FireStation> matchingStations = allStations.forEach(station -> {
+        //        if (station.getStationNumber()==stationNumber) {
+        //            ;
+        //        })
+		return allStations.stream().filter(station -> Integer.parseInt(station.getStationNumber()) == stationNumber).collect(Collectors.toList());
     }
 	@GetMapping("/medicalRecord")
     public List<MedicalRecord> medicalRecord() {
 		return safetyNetService.getAllMedicalRecords();
     }
+	
 }
