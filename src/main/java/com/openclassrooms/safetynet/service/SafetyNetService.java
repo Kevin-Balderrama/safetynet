@@ -1,6 +1,7 @@
 package com.openclassrooms.safetynet.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,21 @@ public class SafetyNetService {
     //MedicalRecord Library
     public List<MedicalRecord> getAllMedicalRecords(){
         return loadJson.getMedicalRecords();
+    }
+
+    //
+    public List<Person> getChildrenAtAddress(String address){
+        List<Person> people = getAllPersons();
+
+        // Get all residents at the given address
+        List<Person> residents = people.stream()
+                .filter(person -> person.getAddress().equalsIgnoreCase(address))
+                .toList();
+
+        // Check if there is at least one child (age < 18) at the address
+        boolean hasChildren = residents.stream().anyMatch(person -> person.getAge() < 18);
+
+        // If there is a child, return all residents; otherwise, return an empty list
+        return hasChildren ? residents : List.of();
     }
 }

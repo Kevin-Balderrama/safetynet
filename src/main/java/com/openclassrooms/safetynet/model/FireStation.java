@@ -19,8 +19,8 @@ public class FireStation {
 		return this;
 	}
 	
-	public String getStationNumber() {
-		return stationNumber;
+	public int getStationNumber() {
+		return Integer.parseInt(stationNumber);
 	}
 	
 	public Set<String> getAddresses() {

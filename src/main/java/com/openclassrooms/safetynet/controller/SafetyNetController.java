@@ -32,11 +32,16 @@ public class SafetyNetController {
 	@GetMapping("/firestation")
     public List<FireStation> firestation(@RequestParam(name = "stationNumber") int stationNumber) {
 		List<FireStation> allStations = safetyNetService.getAllFireStations();
-		return allStations.stream().filter(station -> Integer.parseInt(station.getStationNumber()) == stationNumber).collect(Collectors.toList());
+		return allStations.stream().filter(station -> station.getStationNumber() == stationNumber).collect(Collectors.toList());
     }
 	@GetMapping("/medicalRecord")
     public List<MedicalRecord> medicalRecord() {
 		return safetyNetService.getAllMedicalRecords();
     }
+	@GetMapping("/childAlert")
+	public String getChildrenAtAddress(@RequestParam(name = "address") String address) {
+		return safetyNetService.getChildrenAtAddress(address);
+	}
+	
 	
 }

@@ -78,4 +78,8 @@ public class Person {
 		return this.lastName;
 	}
 
+	public String getAddress(){
+		return this.address;
+	}
+
 }
