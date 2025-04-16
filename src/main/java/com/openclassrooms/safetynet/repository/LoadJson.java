@@ -25,7 +25,6 @@ public class LoadJson {
     private final String filePath = "data.json";
 
     public LoadJson() {
-        // Load JSON data directly in constructor
         loadJsonData();
     }
 
@@ -85,13 +84,32 @@ public class LoadJson {
                     medicationsAny.forEach(medication -> medicationsList.add(medication.toString()));
                 }
 
-                medicalRecords.add(new MedicalRecord(
+                MedicalRecord record = new MedicalRecord(
                         allergiesList.toArray(String[]::new),
                         medicalRecord.get("birthdate").toString(),
                         medicalRecord.get("firstName").toString(),
                         medicalRecord.get("lastName").toString(),
                         medicationsList.toArray(String[]::new)
-                ));
+                );
+                medicalRecords.add(record);
+
+                // Link MedicalRecord to Person
+                persons.stream()
+                        .filter(p -> p.getFirstName().equals(record.getFirstName()) && p.getLastName().equals(record.getLastName()))
+                        .findFirst()
+                        .ifPresent(p -> {
+                            Person updatedPerson = new Person.PersonBuilder()
+                                    .firstName(p.getFirstName())
+                                    .lastName(p.getLastName())
+                                    .phone(p.getPhone())
+                                    .zip(p.getZip())
+                                    .address(p.getAddress())
+                                    .city(p.getCity())
+                                    .email(p.getEmail())
+                                    .records(record)
+                                    .build();
+                            persons.set(persons.indexOf(p), updatedPerson);
+                        });
             });
         }
     }
