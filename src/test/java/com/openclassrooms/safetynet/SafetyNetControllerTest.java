@@ -39,9 +39,9 @@ import com.openclassrooms.safetynet.controller.SafetyNetController;
 
             @Test
             void testGetFireData() throws Exception {
-                mockMvc.perform(get("/fire").param("address", "1509 Culver St"))
+                mockMvc.perform(get("/fire").param("address", "1509%20Culver%20St"))
                        .andExpect(status().isOk())
-                       .andExpect(jsonPath("$.station").isNumber());
+                       .andExpect(jsonPath("$.stationNumber").isNumber());
             }
 
             @Test
