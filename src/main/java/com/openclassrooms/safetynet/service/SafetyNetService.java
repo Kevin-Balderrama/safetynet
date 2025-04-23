@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.safetynet.model.FireStation;
+import com.openclassrooms.safetynet.model.MedicalRecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.LoadJson;
 
@@ -161,5 +162,86 @@ public class SafetyNetService {
                 .map(Person::getEmail)
                 .distinct()
                 .collect(Collectors.toList());
+    }
+    // Person operations
+    public String addPerson(Person person) {
+        repository.getPersons().add(person);
+        return "Person added successfully.";
+    }
+
+    public String updatePerson(Person updatedPerson) {
+        for (Person person : repository.getPersons()) {
+            if (person.getFirstName().equalsIgnoreCase(updatedPerson.getFirstName()) &&
+                person.getLastName().equalsIgnoreCase(updatedPerson.getLastName())) {
+                person.setAddress(updatedPerson.getAddress());
+                person.setCity(updatedPerson.getCity());
+                person.setZip(updatedPerson.getZip());
+                person.setPhone(updatedPerson.getPhone());
+                person.setEmail(updatedPerson.getEmail());
+                return "Person updated successfully.";
+            }
+        }
+        return "Person not found.";
+    }
+
+    public String deletePerson(String firstName, String lastName) {
+        boolean removed = repository.getPersons().removeIf(person ->
+            person.getFirstName().equalsIgnoreCase(firstName) &&
+            person.getLastName().equalsIgnoreCase(lastName)
+        );
+        return removed ? "Person deleted successfully." : "Person not found.";
+    }
+
+    // Firestation operations
+    public String addFireStation(FireStation fireStation) {
+        repository.getFireStations().add(fireStation);
+        return "FireStation added successfully.";
+    }
+
+    public String updateFireStation(String address, int stationNumber) {
+        for (FireStation fireStation : repository.getFireStations()) {
+            if (fireStation.getAddresses().contains(address)) {
+                fireStation.getAddresses().remove(address);
+                fireStation.getAddresses().add(address); // Update station number logic
+                return "FireStation updated successfully.";
+            }
+        }
+        return "FireStation not found.";
+    }
+
+    public String deleteFireStation(String address) {
+        for (FireStation fireStation : repository.getFireStations()) {
+            if (fireStation.getAddresses().remove(address)) {
+                return "FireStation deleted successfully.";
+            }
+        }
+        return "Address not found in any FireStation.";
+    }
+
+    // MedicalRecord operations
+    public String addMedicalRecord(MedicalRecord medicalRecord) {
+        repository.getMedicalRecords().add(medicalRecord);
+        return "MedicalRecord added successfully.";
+    }
+
+    public String updateMedicalRecord(MedicalRecord updatedRecord) {
+        for (MedicalRecord record : repository.getMedicalRecords()) {
+            if (record.getFirstName().equalsIgnoreCase(updatedRecord.getFirstName()) &&
+                record.getLastName().equalsIgnoreCase(updatedRecord.getLastName())) {
+                record.setBirthdate(updatedRecord.getBirthdate());
+                record.setMedications(updatedRecord.getMedications());
+                record.setAllergies(updatedRecord.getAllergies());
+                return "MedicalRecord updated successfully.";
+            }
+        }
+        return "MedicalRecord not found.";
+    }
+
+    public String deleteMedicalRecord(String firstName, String lastName) {
+        boolean removed = repository.getMedicalRecords().removeIf(record ->
+            record.getFirstName().equalsIgnoreCase(firstName) &&
+            record.getLastName().equalsIgnoreCase(lastName)
+        );
+        return removed ? "MedicalRecord deleted successfully." : "MedicalRecord not found.";
     }
 }
