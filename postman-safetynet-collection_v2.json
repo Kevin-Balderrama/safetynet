@@ -1,0 +1,411 @@
+{
+  "info": {
+    "name": "SafetyNet API",
+    "description": "Comprehensive Postman collection for testing SafetyNet API endpoints with validations and example requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Firestation Endpoints",
+      "item": [
+        {
+          "name": "Get Persons by Station 1",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/firestation?stationNumber=1",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [{ "key": "stationNumber", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Get Persons by Station 2",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/firestation?stationNumber=2",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [{ "key": "stationNumber", "value": "2" }]
+            }
+          }
+        },
+        {
+          "name": "Get Persons by Station 5",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/firestation?stationNumber=5",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [{ "key": "stationNumber", "value": "5" }]
+            }
+          }
+        },
+        {
+          "name": "Add Firestation",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/firestation",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"1509 Culver St\",\n  \"station\": \"3\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains success message\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"FireStation added successfully.\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Verify Added Firestation",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/firestation?stationNumber=3",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [{ "key": "stationNumber", "value": "3" }]
+            }
+          }
+        },
+        {
+          "name": "Update Firestation",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{base_url}}/firestation?address=1509+Culver+St&stationNumber=4",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [
+                { "key": "address", "value": "1509 Culver St" },
+                { "key": "stationNumber", "value": "4" }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains updated station number\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"FireStation updated successfully.\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Verify Updated Firestation",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/firestation?stationNumber=4",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [{ "key": "stationNumber", "value": "4" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Firestation",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/firestation?address=1509+Culver+St",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [{ "key": "address", "value": "1509 Culver St" }]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response contains deletion confirmation\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"FireStation deleted successfully.\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Verify Deleted Firestation",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/firestation?stationNumber=3",
+              "host": ["{{base_url}}"],
+              "path": ["firestation"],
+              "query": [{ "key": "stationNumber", "value": "3" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Child Alert Endpoints",
+      "item": [
+        {
+          "name": "Get Children by Address 1509 Culver St",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/childAlert?address=1509%20Culver%20St",
+              "host": ["{{base_url}}"],
+              "path": ["childAlert"],
+              "query": [{ "key": "address", "value": "1509 Culver St" }]
+            }
+          }
+        },
+        {
+          "name": "Get Children by Address 947 E. Rose Dr",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/childAlert?address=947%20E.%20Rose%20Dr",
+              "host": ["{{base_url}}"],
+              "path": ["childAlert"],
+              "query": [{ "key": "address", "value": "947 E. Rose Dr" }]
+            }
+          }
+        },
+        {
+          "name": "Get Children by Address 644 Gershwin Cir",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/childAlert?address=644%20Gershwin%20Cir",
+              "host": ["{{base_url}}"],
+              "path": ["childAlert"],
+              "query": [{ "key": "address", "value": "644 Gershwin Cir" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Phone Alert Endpoints",
+      "item": [
+        {
+          "name": "Get Phone Numbers for Station 1",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/phoneAlert?firestation=1",
+              "host": ["{{base_url}}"],
+              "path": ["phoneAlert"],
+              "query": [{ "key": "firestation", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Get Phone Numbers for Station 4",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/phoneAlert?firestation=4",
+              "host": ["{{base_url}}"],
+              "path": ["phoneAlert"],
+              "query": [{ "key": "firestation", "value": "4" }]
+            }
+          }
+        },
+        {
+          "name": "Get Phone Numbers for Station 5",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/phoneAlert?firestation=5",
+              "host": ["{{base_url}}"],
+              "path": ["phoneAlert"],
+              "query": [{ "key": "firestation", "value": "5" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fire Endpoints",
+      "item": [
+        {
+          "name": "Get Fire Data for Address 1509 Culver St",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/fire?address=1509%20Culver%20St",
+              "host": ["{{base_url}}"],
+              "path": ["fire"],
+              "query": [{ "key": "address", "value": "1509 Culver St" }]
+            }
+          }
+        },
+        {
+          "name": "Get Fire Data for Address 947 E. Rose Dr",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/fire?address=947%20E.%20Rose%20Dr",
+              "host": ["{{base_url}}"],
+              "path": ["fire"],
+              "query": [{ "key": "address", "value": "947 E. Rose Dr" }]
+            }
+          }
+        },
+        {
+          "name": "Get Fire Data for Address 644 Gershwin Cir",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/fire?address=644%20Gershwin%20Cir",
+              "host": ["{{base_url}}"],
+              "path": ["fire"],
+              "query": [{ "key": "address", "value": "644 Gershwin Cir" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Flood Endpoints",
+      "item": [
+        {
+          "name": "Get Flood Data for Stations 1",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/flood/stations?stations=1",
+              "host": ["{{base_url}}"],
+              "path": ["flood", "stations"],
+              "query": [{ "key": "stations", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Get Flood Data for Stations 1,2",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/flood/stations?stations=1,2",
+              "host": ["{{base_url}}"],
+              "path": ["flood", "stations"],
+              "query": [{ "key": "stations", "value": "1,2" }]
+            }
+          }
+        },
+        {
+          "name": "Get Flood Data for Stations 1,5",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/flood/stations?stations=1,5",
+              "host": ["{{base_url}}"],
+              "path": ["flood", "stations"],
+              "query": [{ "key": "stations", "value": "1,5" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Person Info Endpoints",
+      "item": [
+        {
+          "name": "Get Person Info for John Boyd",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/personInfo?firstName=John&lastName=Boyd",
+              "host": ["{{base_url}}"],
+              "path": ["personInfo"],
+              "query": [
+                { "key": "firstName", "value": "John" },
+                { "key": "lastName", "value": "Boyd" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Person Info for Tessa Carman",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/personInfo?firstName=Tessa&lastName=Carman",
+              "host": ["{{base_url}}"],
+              "path": ["personInfo"],
+              "query": [
+                { "key": "firstName", "value": "Tessa" },
+                { "key": "lastName", "value": "Carman" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Community Email Endpoints",
+      "item": [
+        {
+          "name": "Get Emails for City Culver",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/communityEmail?city=Culver",
+              "host": ["{{base_url}}"],
+              "path": ["communityEmail"],
+              "query": [{ "key": "city", "value": "Culver" }]
+            }
+          }
+        },
+        {
+          "name": "Get Emails for City Cooper",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/communityEmail?city=Cooper",
+              "host": ["{{base_url}}"],
+              "path": ["communityEmail"],
+              "query": [{ "key": "city", "value": "Cooper" }]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

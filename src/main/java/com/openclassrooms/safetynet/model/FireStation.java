@@ -20,7 +20,11 @@ public class FireStation {
 	}
 	
 	public int getStationNumber() {
-		return Integer.parseInt(stationNumber);
+		try {
+			return Integer.parseInt(stationNumber);
+		} catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 	
 	public Set<String> getAddresses() {

@@ -22,11 +22,19 @@ public class SafetyNetService {
     private LoadJson repository;
 
     public Map<String, Object> getPersonsByStation(int stationNumber) {
+        if (stationNumber == 0) {
+            return Map.of("error", "Invalid station number: 0");
+        }
+
         List<FireStation> fireStations = repository.getFireStations();
         Set<String> addresses = fireStations.stream()
                 .filter(fs -> fs.getStationNumber() == stationNumber)
                 .flatMap(fs -> fs.getAddresses().stream()) // Correctly handle Set<String>
                 .collect(Collectors.toSet());
+
+        if (addresses.isEmpty()) {
+            return Map.of("error", "No fire station found for the given station number");
+        }
 
         List<Person> allPersons = repository.getPersons();
         List<Map<String, String>> persons = new ArrayList<>();
