@@ -67,7 +67,7 @@ public class SafetyNetService {
             }
         }
 
-        // Return an empty structure if no children are found
+        if (children.isEmpty()) return "";
         return Map.of("children", children, "otherResidents", otherResidents);
     }
 
@@ -85,6 +85,12 @@ public class SafetyNetService {
     }
 
     public Map<String, Object> getFireData(String address) {
+        int stationNumber = repository.getFireStations().stream()
+                .filter(fs -> fs.getAddresses().contains(address.toLowerCase()))
+                .map(FireStation::getStationNumber)
+                .findFirst()
+                .orElse(-1);
+
         List<Map<String, Object>> persons = repository.getPersons().stream()
         .filter(p -> p.getAddress().equalsIgnoreCase(address))
         .map(p -> {
@@ -97,16 +103,6 @@ public class SafetyNetService {
             return personMap;
         })
         .collect(Collectors.toList());
-
-        if (persons.isEmpty()) {
-            return Map.of("residents", persons);
-        }
-
-        int stationNumber = repository.getFireStations().stream()
-                .filter(fs -> fs.getAddresses().contains(address.toLowerCase()))
-                .map(FireStation::getStationNumber)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid address"));
 
         return Map.of("stationNumber", stationNumber, "residents", persons);
     }
@@ -145,7 +141,7 @@ public class SafetyNetService {
     }
 
     public List<Map<String, Object>> getPersonInfo(String firstName, String lastName) {
-        List<Map<String, Object>> result = repository.getPersons().stream()
+        return repository.getPersons().stream()
         .filter(p -> p.getFirstName().equalsIgnoreCase(firstName) && p.getLastName().equalsIgnoreCase(lastName))
         .map(p -> {
             Map<String, Object> personMap = new HashMap<>();
@@ -158,13 +154,6 @@ public class SafetyNetService {
             return personMap;
         })
         .collect(Collectors.toList());
-
-        // Ensure the result is not empty by checking the repository data
-        if (result.isEmpty()) {
-            throw new IllegalArgumentException("No person found with the given firstName and lastName.");
-        }
-
-        return result;
     }
 
     public List<String> getEmailsByCity(String city) {
