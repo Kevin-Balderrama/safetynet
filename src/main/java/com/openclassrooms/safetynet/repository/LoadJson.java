@@ -61,7 +61,7 @@ public class LoadJson {
             Map<String, FireStation> fireStationMap = new HashMap<>();
             fireStationAny.forEach(anyStation -> {
                 fireStationMap.compute(anyStation.get("station").toString(),
-                        (_, v) -> v == null
+                        (k, v) -> v == null
                                 ? new FireStation(anyStation.get("station").toString()).addAddress(anyStation.get("address").toString())
                                 : v.addAddress(anyStation.get("address").toString()));
             });
