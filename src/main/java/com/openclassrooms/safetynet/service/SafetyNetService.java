@@ -75,7 +75,7 @@ public class SafetyNetService {
             }
         }
 
-        if (children.isEmpty()) return "";
+        if (children.isEmpty()) return new ArrayList<>();
         return Map.of("children", children, "otherResidents", otherResidents);
     }
 

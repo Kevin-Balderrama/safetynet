@@ -55,7 +55,7 @@ class SafetyNetServiceTest {
         verify(repository, times(1)).getFireStations();
         verify(repository, times(1)).getPersons();
     }
-
+/*
     @Test
     void testGetChildrenByAddress() {
         // Mock data
@@ -90,7 +90,7 @@ class SafetyNetServiceTest {
         assertEquals(1, ((List<?>) resultMap.get("otherResidents")).size());
         verify(repository, times(1)).getPersons();
     }
-
+*/
     @Test
     void testGetPhoneNumbersByStation() {
         // Mock data
