@@ -3,6 +3,9 @@ package com.openclassrooms.safetynet.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +22,22 @@ import com.openclassrooms.safetynet.service.SafetyNetService;
 
 @RestController
 public class SafetyNetController {
+    private static final Logger logger = LogManager.getLogger(SafetyNetController.class);
 
     @Autowired
     private SafetyNetService service;
 
     @GetMapping("/firestation")
     public Map<String, Object> getPersonsByStation(@RequestParam int stationNumber) {
-        return service.getPersonsByStation(stationNumber);
+        logger.info("Fetching persons by station number: {}", stationNumber);
+        Map<String, Object> response = service.getPersonsByStation(stationNumber);
+        if (response == null) {
+            logger.warn("No data found for station number: {}", stationNumber);
+            return Map.of("error", "No data found for the given station number.");
+        }else{
+            logger.info("Data found for station number: {}", stationNumber);
+        }
+        return response;
     }
 
     @GetMapping("/childAlert")
