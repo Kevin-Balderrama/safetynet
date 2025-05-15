@@ -42,79 +42,199 @@ public class SafetyNetController {
 
     @GetMapping("/childAlert")
     public Object getChildrenByAddress(@RequestParam String address) {
-        return service.getChildrenByAddress(address);
+        logger.info("Fetching children by address: {}", address);
+        Object response = service.getChildrenByAddress(address);
+        if (response == null) {
+            logger.warn("No data found for address: {}", address);
+            return Map.of("error", "No data found for the given address.");
+        }else{
+            logger.info("Data found for address: {}", address);
+        }
+        return response;
     }
 
     @GetMapping("/phoneAlert")
     public List<String> getPhonesByStation(@RequestParam int firestation) {
-        return service.getPhoneNumbersByStation(firestation);
+        logger.info("Fetching phones by firestation: {}", firestation);
+        List<String> response = service.getPhoneNumbersByStation(firestation);
+        if (response == null || response.isEmpty()) {
+            logger.warn("No data found for firestation: {}", firestation);
+            return List.of("No data found for the given firestation.");
+        }else{
+            logger.info("Phone number(s) found for firestation: {}", firestation);
+        }
+        return response;
     }
 
     @GetMapping("/fire")
     public Map<String, Object> getFireData(@RequestParam String address) {
-        return service.getFireData(address);
+        logger.info("Fetching fire data by address: {}", address);
+        Map<String, Object> response = service.getFireData(address);
+        if (response == null) {
+            logger.warn("No data found for address: {}", address);
+            return Map.of("error", "No data found for the given address.");
+        }else{
+            logger.info("Data found for address: {}", address);
+        }
+        return response;
     }
 
     @GetMapping("/flood/stations")
     public Map<String, List<Map<String, Object>>> getFloodData(@RequestParam List<Integer> stations) {
-        return service.getFloodData(stations);
+        logger.info("Fetching flood data for stations: {}", stations);
+        Map<String, List<Map<String, Object>>> response = service.getFloodData(stations);
+        if (response == null || response.isEmpty()) {
+            logger.warn("No data found for stations: {}", stations);
+            return Map.of("error", List.of());
+        }else{
+            logger.info("Data found for stations: {}", stations);
+        }
+        return response;
     }
 
     @GetMapping("/personInfo")
     public List<Map<String, Object>> getPersonInfo(@RequestParam String firstName, @RequestParam String lastName) {
-        return service.getPersonInfo(firstName, lastName);
+        logger.info("Fetching person info for: {} {}", firstName, lastName);
+        List<Map<String, Object>> response = service.getPersonInfo(firstName, lastName);
+        if (response == null || response.isEmpty()) {
+            logger.warn("No data found for person: {} {}", firstName, lastName);
+            return List.of(Map.of("error", "No data found for the given person."));
+        }else{
+            logger.info("Data found for person: {} {}", firstName, lastName);
+        }
+        return response;
     }
 
     @GetMapping("/communityEmail")
     public List<String> getEmailsByCity(@RequestParam String city) {
-        return service.getEmailsByCity(city);
+        logger.info("Fetching emails by city: {}", city);
+        List<String> response = service.getEmailsByCity(city);
+        if (response == null || response.isEmpty()) {
+            logger.warn("No data found for city: {}", city);
+            return List.of("No data found for the given city.");
+        }else{
+            logger.info("Email(s) found for city: {}", city);
+        }
+        return response;
     }
     // Person Endpoints
     @PostMapping("/person")
     public String addPerson(@RequestBody Person person) {
-        return service.addPerson(person);
+        logger.info("Adding person: {}", person);
+        String response = service.addPerson(person);
+        if (response == null) {
+            logger.warn("Failed to add person: {}", person);
+            return "Failed to add person.";
+        }else{
+            logger.info("Person added successfully: {}", person);
+        }
+        return response;
     }
 
     @PutMapping("/person")
     public String updatePerson(@RequestBody Person person) {
-        return service.updatePerson(person);
+        logger.info("Updating person: {}", person);
+        String response = service.updatePerson(person);
+        if (response == null) {
+            logger.warn("Failed to update person: {}", person);
+            return "Failed to update person.";
+        }else{
+            logger.info("Person updated successfully: {}", person);
+        }
+        return response;
     }
 
     @DeleteMapping("/person")
     public String deletePerson(@RequestParam String firstName, @RequestParam String lastName) {
-        return service.deletePerson(firstName, lastName);
+        logger.info("Deleting person: {} {}", firstName, lastName);
+        String response = service.deletePerson(firstName, lastName);
+        if (response == null) {
+            logger.warn("Failed to delete person: {} {}", firstName, lastName);
+            return "Failed to delete person.";
+        }else{
+            logger.info("Person deleted successfully: {} {}", firstName, lastName);
+        }
+        return response;
     }
 
     // Firestation Endpoints
     @PostMapping("/firestation")
     public String addFireStation(@RequestBody FireStation fireStation) {
-        return service.addFireStation(fireStation);
+        logger.info("Adding fire station: {}", fireStation);
+        String response = service.addFireStation(fireStation);
+        if (response == null) {
+            logger.warn("Failed to add fire station: {}", fireStation);
+            return "Failed to add fire station.";
+        }else{
+            logger.info("Fire station added successfully: {}", fireStation);
+        }
+        return response;
     }
 
     @PutMapping("/firestation")
     public String updateFireStation(@RequestParam String address, @RequestParam int stationNumber) {
-        return service.updateFireStation(address, stationNumber);
+        logger.info("Updating fire station for address: {} to station number: {}", address, stationNumber);
+        String response = service.updateFireStation(address, stationNumber);
+        if (response == null) {
+            logger.warn("Failed to update fire station for address: {} to station number: {}", address, stationNumber);
+            return "Failed to update fire station.";
+        }else{
+            logger.info("Fire station updated successfully for address: {} to station number: {}", address, stationNumber);
+        }
+        return response;
     }
 
     @DeleteMapping("/firestation")
     public String deleteFireStation(@RequestParam String address) {
-        return service.deleteFireStation(address);
+        logger.info("Deleting fire station for address: {}", address);
+        String response = service.deleteFireStation(address);
+        if (response == null) {
+            logger.warn("Failed to delete fire station for address: {}", address);
+            return "Failed to delete fire station.";
+        }else{
+            logger.info("Fire station deleted successfully for address: {}", address);
+        }
+        return response;
     }
 
     // MedicalRecord Endpoints
     @PostMapping("/medicalRecord")
     public String addMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
-        return service.addMedicalRecord(medicalRecord);
+        logger.info("Adding medical record: {}", medicalRecord);
+        String response = service.addMedicalRecord(medicalRecord);
+        if (response == null) {
+            logger.warn("Failed to add medical record: {}", medicalRecord);
+            return "Failed to add medical record.";
+        }else{
+            logger.info("Medical record added successfully: {}", medicalRecord);
+        }
+        return response;
     }
 
     @PutMapping("/medicalRecord")
     public String updateMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
-        return service.updateMedicalRecord(medicalRecord);
+        logger.info("Updating medical record: {}", medicalRecord);
+        String response = service.updateMedicalRecord(medicalRecord);
+        if (response == null) {
+            logger.warn("Failed to update medical record: {}", medicalRecord);
+            return "Failed to update medical record.";
+        }else{
+            logger.info("Medical record updated successfully: {}", medicalRecord);
+        }
+        return response;
     }
 
     @DeleteMapping("/medicalRecord")
     public String deleteMedicalRecord(@RequestParam String firstName, @RequestParam String lastName) {
-        return service.deleteMedicalRecord(firstName, lastName);
+        logger.info("Deleting medical record for: {} {}", firstName, lastName);
+        String response = service.deleteMedicalRecord(firstName, lastName);
+        if (response == null) {
+            logger.warn("Failed to delete medical record for: {} {}", firstName, lastName);
+            return "Failed to delete medical record.";
+        }else{
+            logger.info("Medical record deleted successfully for: {} {}", firstName, lastName);
+        }
+        return response;
     }
     
 }
