@@ -156,7 +156,7 @@ sequenceDiagram
     Controller-->>User: JSON response
 ```
 
-http://localhost:8080/flood/stations?stations=<a list of station_numbers> 
+http://localhost:8080/flood/stations?stations=<List> 
 
 This should return a list of all the households in each fire station’s jurisdiction. This list needs to group 
 people by household address, include name, phone number, and age of each person, and  any 
@@ -170,7 +170,7 @@ http://localhost:8080/flood/stations?stations=12
 
 http://localhost:8080/flood/stations?stations=1,5
 
-<a list of station_numbers> should be seperated by commas, returns empty list if non-existent
+<list of station_numbers> should be seperated by commas, returns empty list if non-existent
 
 ```mermaid
 sequenceDiagram
