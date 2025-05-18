@@ -33,8 +33,27 @@ http://localhost:8080/firestation?stationNumber=2
 
 http://localhost:8080/firestation?stationNumber=5
 
-
 <station_number> returns blank if station does not exist
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Controller as SafetyNetController
+    participant Service as SafetyNetService
+    participant Repository as LoadJson
+    participant Data as data.json
+
+    User->>Controller: GET /firestation?stationNumber=1
+    Controller->>Service: getPersonsByStation(1)
+    Service->>Repository: getFireStations()
+    Repository->>Data: Read firestations
+    Repository-->>Service: List<FireStation>
+    Service->>Repository: getPersons()
+    Repository->>Data: Read persons
+    Repository-->>Service: List<Person>
+    Service-->>Controller: Map (persons, adults, children)
+    Controller-->>User: JSON response
+```
 
 http://localhost:8080/childAlert?address=<address> 
 This URL should return a list of children (anyone under the age of 18) at that address. The list should 
@@ -49,6 +68,23 @@ http://localhost:8080/childAlert?address=644%20Gershwin%20Cir
 
 <address> returns blank if no children present
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Controller as SafetyNetController
+    participant Service as SafetyNetService
+    participant Repository as LoadJson
+    participant Data as data.json
+
+    User->>Controller: GET /childAlert?address=1509 Culver St
+    Controller->>Service: getChildrenByAddress(address)
+    Service->>Repository: getPersons()
+    Repository->>Data: Read persons
+    Repository-->>Service: List<Person>
+    Service-->>Controller: List<Child> + List<OtherResidents>
+    Controller-->>User: JSON response
+```
+
 http://localhost:8080/phoneAlert?firestation=<firestation_number> 
 
 This URL should return a list of phone numbers of each person within the fire station’s jurisdiction.We’ll 
@@ -60,6 +96,26 @@ http://localhost:8080/phoneAlert?firestation=4
 http://localhost:8080/phoneAlert?firestation=5 
 
 <firestation_number> returns empty string if station does not exist
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Controller as SafetyNetController
+    participant Service as SafetyNetService
+    participant Repository as LoadJson
+    participant Data as data.json
+
+    User->>Controller: GET /phoneAlert?firestation=1
+    Controller->>Service: getPhoneNumbersByStation(stationNumber)
+    Service->>Repository: getFireStations()
+    Repository->>Data: Read firestations
+    Repository-->>Service: List<FireStation>
+    Service->>Repository: getPersons()
+    Repository->>Data: Read persons
+    Repository-->>Service: List<Person>
+    Service-->>Controller: List<PhoneNumbers>
+    Controller-->>User: JSON response
+```
 
 http://localhost:8080/fire?address=<address> 
 
@@ -73,6 +129,29 @@ http://localhost:8080/fire?address=947%20E.%20Rose%20Dr
 http://localhost:8080/fire?address=644%20Gershwin%20Cir
 
 <address> currently returns -1 as station_number regardless of actual, further correction needed
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Controller as SafetyNetController
+    participant Service as SafetyNetService
+    participant Repository as LoadJson
+    participant Data as data.json
+
+    User->>Controller: GET /fire?address=1509 Culver St
+    Controller->>Service: getFireData(address)
+    Service->>Repository: getFireStations()
+    Repository->>Data: Read firestations
+    Repository-->>Service: List<FireStation>
+    Service->>Repository: getPersons()
+    Repository->>Data: Read persons
+    Repository-->>Service: List<Person>
+    Service->>Repository: getMedicalRecords()
+    Repository->>Data: Read medical records
+    Repository-->>Service: List<MedicalRecord>
+    Service-->>Controller: stationNumber + List<PersonDetails>
+    Controller-->>User: JSON response
+```
 
 http://localhost:8080/flood/stations?stations=<a list of station_numbers> 
 
@@ -90,6 +169,29 @@ http://localhost:8080/flood/stations?stations=1,5
 
 <a list of station_numbers> should be seperated by commas, returns empty list if non-existent
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Controller as SafetyNetController
+    participant Service as SafetyNetService
+    participant Repository as LoadJson
+    participant Data as data.json
+
+    User->>Controller: GET /flood/stations?stations=1,2
+    Controller->>Service: getHouseholdsByStations([1,2])
+    Service->>Repository: getFireStations()
+    Repository->>Data: Read firestations
+    Repository-->>Service: List<FireStation>
+    Service->>Repository: getPersons()
+    Repository->>Data: Read persons
+    Repository-->>Service: List<Person>
+    Service->>Repository: getMedicalRecords()
+    Repository->>Data: Read medical records
+    Repository-->>Service: List<MedicalRecord>
+    Service-->>Controller: Map<Address, List<PersonDetails>>
+    Controller-->>User: JSON response
+```
+
 http://localhost:8080/personInfo?firstName=<firstName>&lastName=<lastName> 
 
 This should return the person’s name, address, age, email, list of medications with dosages and allergies. 
@@ -101,6 +203,26 @@ http://localhost:8080/personInfo?firstName=Tessa&lastName=Carman
 http://localhost:8080/personInfo?firstName=John&lastName=Carman
 
 <firstName>, <lastName> must match person in database, returns empty array if person not found
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Controller as SafetyNetController
+    participant Service as SafetyNetService
+    participant Repository as LoadJson
+    participant Data as data.json
+
+    User->>Controller: GET /personInfo?firstName=John&lastName=Boyd
+    Controller->>Service: getPersonInfo(firstName, lastName)
+    Service->>Repository: getPersons()
+    Repository->>Data: Read persons
+    Repository-->>Service: List<Person>
+    Service->>Repository: getMedicalRecords()
+    Repository->>Data: Read medical records
+    Repository-->>Service: List<MedicalRecord>
+    Service-->>Controller: List<PersonInfo>
+    Controller-->>User: JSON response
+```
 
 http://localhost:8080/communityEmail?city=<city> 
 
@@ -122,17 +244,15 @@ sequenceDiagram
     participant Repository as LoadJson
     participant Data as data.json
 
-    User->>Controller: HTTP GET /firestation?stationNumber=1
-    Controller->>Service: getPersonsByStation(1)
-    Service->>Repository: getFireStations()
-    Repository->>Data: Read firestations
-    Repository-->>Service: List<FireStation>
+    User->>Controller: GET /communityEmail?city=Culver
+    Controller->>Service: getEmailsByCity(city)
     Service->>Repository: getPersons()
     Repository->>Data: Read persons
     Repository-->>Service: List<Person>
-    Service-->>Controller: Map (persons, adults, children)
+    Service-->>Controller: List<Email>
     Controller-->>User: JSON response
 ```
+
 - **Data Models**:
   - `Person`: Represents an individual with attributes like name, address, and medical record.
   - `FireStation`: Maps addresses to fire station numbers.
