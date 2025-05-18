@@ -1,5 +1,6 @@
 package com.openclassrooms.safetynet.controller;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -85,7 +86,7 @@ public class SafetyNetController {
         Map<String, List<Map<String, Object>>> response = service.getFloodData(stations);
         if (response == null || response.isEmpty()) {
             logger.warn("No data found for stations: {}", stations);
-            return Map.of("error", List.of());
+            return Collections.emptyMap();
         }else{
             logger.info("Data found for stations: {}", stations);
         }

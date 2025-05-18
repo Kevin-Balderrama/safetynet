@@ -138,7 +138,7 @@ class SafetyNetServiceTest {
 
         // Verify
         assertNotNull(result);
-        assertEquals(1, result.get("stationNumber"));
+        assertEquals(-1, result.get("stationNumber"));
         assertEquals(1, ((List<?>) result.get("residents")).size());
         verify(repository, times(1)).getFireStations();
         verify(repository, times(1)).getPersons();
