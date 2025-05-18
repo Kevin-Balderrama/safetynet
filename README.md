@@ -56,6 +56,7 @@ sequenceDiagram
 ```
 
 http://localhost:8080/childAlert?address=<address> 
+
 This URL should return a list of children (anyone under the age of 18) at that address. The list should 
 include the first and last name of each child, the child’s age, and a list of other persons living at that 
 address. If there are no children at the address, then this URL can return an empty string. 
@@ -89,6 +90,7 @@ http://localhost:8080/phoneAlert?firestation=<firestation_number>
 
 This URL should return a list of phone numbers of each person within the fire station’s jurisdiction.We’ll 
 use this to send emergency text messages to specific households. 
+
 http://localhost:8080/phoneAlert?firestation=1
 
 http://localhost:8080/phoneAlert?firestation=4 
@@ -122,6 +124,7 @@ http://localhost:8080/fire?address=<address>
 This URL should return the fire station number that services the provided address as well as a list of all of 
 the people living at the address. This list should include each person’s name, phone number, age, 
 medications with dosage, and allergies. 
+
 http://localhost:8080/fire?address=1509%20Culver%20St
 
 http://localhost:8080/fire?address=947%20E.%20Rose%20Dr
@@ -196,6 +199,7 @@ http://localhost:8080/personInfo?firstName=<firstName>&lastName=<lastName>
 
 This should return the person’s name, address, age, email, list of medications with dosages and allergies. 
 If there is more than one person with the same name, this URL should return all of them. 
+
 http://localhost:8080/personInfo?firstName=John&lastName=Boyd
 
 http://localhost:8080/personInfo?firstName=Tessa&lastName=Carman 
