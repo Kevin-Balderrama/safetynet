@@ -1,0 +1,55 @@
+2025-05-17T22:51:25.593-04:00  INFO 29952 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.12 with PID 29952 (C:\Users\BlueBird\Documents\OpenClassrooms\safetynet\target\classes started by BlueBird in C:\Users\BlueBird\Documents\OpenClassrooms\safetynet)
+2025-05-17T22:51:25.594-04:00  INFO 29952 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-05-17T22:51:26.041-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-17T22:51:26.043-04:00  INFO 29952 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-17T22:51:26.044-04:00  INFO 29952 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-17T22:51:26.068-04:00  INFO 29952 --- [safetynet] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-17T22:51:26.069-04:00  INFO 29952 --- [safetynet] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 470 ms
+2025-05-17T22:51:26.330-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-17T22:51:26.335-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoints beneath base path '/actuator'
+2025-05-17T22:51:26.366-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-17T22:51:26.378-04:00  INFO 29952 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 0.845 seconds (process running for 437.227)
+2025-05-17T22:51:26.388-04:00  INFO 29952 --- [safetynet] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   LogFileWebEndpointAutoConfiguration#logFileWebEndpoint matched:
+      - Log File found logging.file.name logs/safetynet.log (LogFileWebEndpointAutoConfiguration.LogFileCondition)
+      - @ConditionalOnMissingBean (types: org.springframework.boot.actuate.logging.LogFileWebEndpoint; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+    None
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+2025-05-17T22:52:08.670-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-17T22:52:08.671-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-17T22:52:08.672-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-05-17T22:52:08.680-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.SafetyNetController     : Fetching persons by station number: 1
+2025-05-17T22:52:08.682-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.SafetyNetController     : Data found for station number: 1
+2025-05-17T22:52:12.848-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-3] c.o.s.controller.SafetyNetController     : Fetching persons by station number: 2
+2025-05-17T22:52:12.849-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-3] c.o.s.controller.SafetyNetController     : Data found for station number: 2
+2025-05-17T22:52:15.885-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-4] c.o.s.controller.SafetyNetController     : Fetching persons by station number: 5
+2025-05-17T22:52:15.886-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-4] c.o.s.controller.SafetyNetController     : Data found for station number: 5
