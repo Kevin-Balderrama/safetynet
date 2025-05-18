@@ -127,38 +127,30 @@ http://localhost:8080/communityEmail?city=New%20York
   - `Person`: Represents an individual with attributes like name, address, and medical record.
   - `FireStation`: Maps addresses to fire station numbers.
   - `MedicalRecord`: Stores medical history, medications, and allergies.
- ┌────────────────────────┐  
- │FireStation             │  
- ├────────────────────────┤  
- │- addresses: Set<String>│  
- │- station: String       │  
- └────────────────────────┘  
-              |              
-              |              
-┌───────────────────────────┐
-│Person                     │
-├───────────────────────────┤
-│- firstName: String        │
-│- lastName: String         │
-│- address: String          │
-│- city: String             │
-│- zip: String              │
-│- phone: String            │
-│- email: String            │
-│- age: int                 │
-│- medications: List<String>│
-│- allergies: List<String>  │
-└───────────────────────────┘
-              |              
-┌───────────────────────────┐
-│MedicalRecord              │
-├───────────────────────────┤
-│- firstName: String        │
-│- lastName: String         │
-│- birthdate: String        │
-│- medications: List<String>│
-│- allergies: List<String>  │
-└───────────────────────────┘
++-------------------+        covers         +-------------------+
+|   FireStation     |<---------------------|      Person        |
++-------------------+                      +-------------------+
+| - station: String |                      | - firstName: String|
+| - addresses: Set  |                      | - lastName: String |
++-------------------+                      | - address: String  |
+                                           | - city: String     |
+                                           | - zip: String      |
+                                           | - phone: String    |
+                                           | - email: String    |
+                                           | - age: int         |
+                                           +-------------------+
+                                                   |
+                                                   | has
+                                                   v
+                                         +-----------------------+
+                                         |    MedicalRecord      |
+                                         +-----------------------+
+                                         | - firstName: String   |
+                                         | - lastName: String    |
+                                         | - birthdate: String   |
+                                         | - medications: List   |
+                                         | - allergies: List     |
+                                         +-----------------------+
 
 ## 4. Non-Functional Requirements
 - **Performance**: Handle requests for large datasets efficiently.
