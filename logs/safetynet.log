@@ -53,3 +53,34 @@ Unconditional classes:
 2025-05-17T22:52:12.849-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-3] c.o.s.controller.SafetyNetController     : Data found for station number: 2
 2025-05-17T22:52:15.885-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-4] c.o.s.controller.SafetyNetController     : Fetching persons by station number: 5
 2025-05-17T22:52:15.886-04:00  INFO 29952 --- [safetynet] [http-nio-8080-exec-4] c.o.s.controller.SafetyNetController     : Data found for station number: 5
+2025-05-17T23:21:49.004-04:00  INFO 29952 --- [safetynet] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2025-05-17T23:21:49.006-04:00  INFO 29952 --- [safetynet] [Thread-7] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-05-17T23:21:49.746-04:00  INFO 29952 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-05-17T23:21:49.872-04:00  INFO 29952 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.12 with PID 29952 (C:\Users\BlueBird\Documents\OpenClassrooms\safetynet\target\classes started by BlueBird in C:\Users\BlueBird\Documents\OpenClassrooms\safetynet)
+2025-05-17T23:21:49.873-04:00  INFO 29952 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-05-17T23:21:50.303-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-17T23:21:50.304-04:00  INFO 29952 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-17T23:21:50.305-04:00  INFO 29952 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-17T23:21:50.327-04:00  INFO 29952 --- [safetynet] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-17T23:21:50.328-04:00  INFO 29952 --- [safetynet] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 452 ms
+2025-05-17T23:21:50.543-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-17T23:21:50.551-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoints beneath base path '/actuator'
+2025-05-17T23:21:50.569-04:00  INFO 29952 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-17T23:21:50.576-04:00  INFO 29952 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 0.743 seconds (process running for 2266.248)
+2025-05-17T23:21:50.579-04:00  INFO 29952 --- [safetynet] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-05-17T23:33:38.071-04:00  INFO 30392 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.12 with PID 30392 (C:\Users\BlueBird\Documents\OpenClassrooms\safetynet\target\classes started by BlueBird in C:\Users\BlueBird\Documents\OpenClassrooms\safetynet)
+2025-05-17T23:33:38.074-04:00  INFO 30392 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-05-17T23:33:38.141-04:00  INFO 30392 --- [safetynet] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-17T23:33:38.142-04:00  INFO 30392 --- [safetynet] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-17T23:33:40.131-04:00  INFO 30392 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-17T23:33:40.149-04:00  INFO 30392 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-17T23:33:40.150-04:00  INFO 30392 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-17T23:33:40.207-04:00  INFO 30392 --- [safetynet] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-17T23:33:40.207-04:00  INFO 30392 --- [safetynet] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2064 ms
+2025-05-17T23:33:41.408-04:00  INFO 30392 --- [safetynet] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-17T23:33:41.423-04:00  INFO 30392 --- [safetynet] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoints beneath base path '/actuator'
+2025-05-17T23:33:41.580-04:00  INFO 30392 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-17T23:33:41.606-04:00  INFO 30392 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 4.086 seconds (process running for 4.858)
+2025-05-17T23:33:43.554-04:00  INFO 30392 --- [safetynet] [RMI TCP Connection(2)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-17T23:33:43.555-04:00  INFO 30392 --- [safetynet] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-17T23:33:43.557-04:00  INFO 30392 --- [safetynet] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

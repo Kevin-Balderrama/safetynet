@@ -1,3 +1,23 @@
+# SafetyNet Design Document
+
+## 1. Introduction
+- **Purpose**: Provide emergency information to first responders, such as fire stations and medical records, to enhance emergency response efficiency.
+- **Scope**: Backend services implemented in Java with a small HTML component for UI. The system interacts with fire stations, medical records, and personal information.
+
+## 2. System Overview
+- **Architecture**: Service-oriented architecture with RESTful APIs.
+- **Key Features**:
+  - Retrieve fire station and resident information.
+  - Manage medical records and fire station assignments.
+  - Provide emergency contact details.
+
+## 3. Functional Specifications
+- **Endpoints**:
+  - `GET /firestation`: Returns residents by fire station number.
+  - `GET /childAlert`: Lists children at a given address.
+  - `POST /medicalRecord`: Add medical records.
+  - `PUT /medicalRecord`: Update medical records.
+  - `DELETE /medicalRecord`: Delete medical records.
 http://localhost:8080/firestation?stationNumber=<station_number> 
 This URL should return a list of people serviced by the corresponding fire station. So if station number = 1, 
 it should return the people serviced by station number 1. The list of people should include these specific 
@@ -59,3 +79,123 @@ http://localhost:8080/communityEmail?city=Culver
 http://localhost:8080/communityEmail?city=Cooper
 http://localhost:8080/communityEmail?city=New%20York
 <city> returns empty array if city not in database
+  
+       ┌─┐                                                                                                                    ,.-^^-._ 
+       ║"│                                                                                                                   |-.____.-|
+       └┬┘                                                                                                                   |        |
+       ┌┼┐                          ┌─────────────────────┐           ┌──────────────────┐           ┌──────────┐            |        |
+        │                           │Spring Controller    │           │Service Layer     │           │Repository│            |        |
+       ┌┴┐                          │(SafetyNetController)│           │(SafetyNetService)│           │(LoadJson)│            '-.____.-'
+      User                          └──────────┬──────────┘           └─────────┬────────┘           └─────┬────┘            data.json 
+        │HTTP GET /firestation?stationNumber=1 │                                │                          │                     │     
+        │─────────────────────────────────────>│                                │                          │                     │     
+        │                                      │                                │                          │                     │     
+        │                                      │    getPersonsByStation(1)      │                          │                     │     
+        │                                      │───────────────────────────────>│                          │                     │     
+        │                                      │                                │                          │                     │     
+        │                                      │                                │    getFireStations()     │                     │     
+        │                                      │                                │─────────────────────────>│                     │     
+        │                                      │                                │                          │                     │     
+        │                                      │                                │                          │(reads firestations) │     
+        │                                      │                                │                          │────────────────────>│     
+        │                                      │                                │                          │                     │     
+        │                                      │                                │    List<FireStation>     │                     │     
+        │                                      │                                │<─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│                     │     
+        │                                      │                                │                          │                     │     
+        │                                      │                                │      getPersons()        │                     │     
+        │                                      │                                │─────────────────────────>│                     │     
+        │                                      │                                │                          │                     │     
+        │                                      │                                │                          │  (reads persons)    │     
+        │                                      │                                │                          │────────────────────>│     
+        │                                      │                                │                          │                     │     
+        │                                      │                                │      List<Person>        │                     │     
+        │                                      │                                │<─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│                     │     
+        │                                      │                                │                          │                     │     
+        │                                      │Map (persons, adults, children) │                          │                     │     
+        │                                      │<─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│                          │                     │     
+        │                                      │                                │                          │                     │     
+        │            JSON response             │                                │                          │                     │     
+        │<─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─│                                │                          │                     │     
+      User                          ┌──────────┴──────────┐           ┌─────────┴────────┐           ┌─────┴────┐            data.json 
+       ┌─┐                          │Spring Controller    │           │Service Layer     │           │Repository│             ,.-^^-._ 
+       ║"│                          │(SafetyNetController)│           │(SafetyNetService)│           │(LoadJson)│            |-.____.-|
+       └┬┘                          └─────────────────────┘           └──────────────────┘           └──────────┘            |        |
+       ┌┼┐                                                                                                                   |        |
+        │                                                                                                                    |        |
+       ┌┴┐                                                                                                                   '-.____.-'
+- **Data Models**:
+  - `Person`: Represents an individual with attributes like name, address, and medical record.
+  - `FireStation`: Maps addresses to fire station numbers.
+  - `MedicalRecord`: Stores medical history, medications, and allergies.
+ ┌────────────────────────┐  
+ │FireStation             │  
+ ├────────────────────────┤  
+ │- addresses: Set<String>│  
+ │- station: String       │  
+ └────────────────────────┘  
+              |              
+              |              
+┌───────────────────────────┐
+│Person                     │
+├───────────────────────────┤
+│- firstName: String        │
+│- lastName: String         │
+│- address: String          │
+│- city: String             │
+│- zip: String              │
+│- phone: String            │
+│- email: String            │
+│- age: int                 │
+│- medications: List<String>│
+│- allergies: List<String>  │
+└───────────────────────────┘
+              |              
+┌───────────────────────────┐
+│MedicalRecord              │
+├───────────────────────────┤
+│- firstName: String        │
+│- lastName: String         │
+│- birthdate: String        │
+│- medications: List<String>│
+│- allergies: List<String>  │
+└───────────────────────────┘
+
+## 4. Non-Functional Requirements
+- **Performance**: Handle requests for large datasets efficiently.
+- **Reliability**: Ensure data consistency and accurate emergency details.
+- **Security**: Protect sensitive personal and medical information with encryption and authentication.
+
+## 5. System Design
+- **Modules**:
+  - `Controller`: Handles API requests and maps them to services.
+  - `Service`: Implements business logic for handling data.
+  - `Repository`: Manages data storage and retrieval.
+- **Data Flow**:
+  - API Request → Controller → Service → Repository → Response
+
+## 6. Database Design
+- **Tables**:
+  - `Persons`: Stores personal information.
+  - `FireStations`: Maps addresses to station numbers.
+  - `MedicalRecords`: Stores medical history and allergies.
+- **Relationships**:
+  - One-to-Many: FireStations ↔ Addresses
+  - One-to-One: Persons ↔ MedicalRecords
+
+## 7. UI Design
+- **HTML Component**: Displays a welcome message and project purpose.
+- **Future Enhancements**:
+  - Interactive dashboard for emergency responders.
+
+## 8. Future Enhancements
+- Add real-time notification features.
+- Integrate geographic information systems (GIS) for mapping.
+- Support for multi-language localization.
+
+## 9. Testing
+- **Methodology**:
+  - Unit Tests: Validate individual modules.
+  - Integration Tests: Verify data flow between modules.
+- **Tools**:
+  - JUnit for automated testing.
+  - Mock data for simulating real-world scenarios.
