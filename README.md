@@ -40,6 +40,7 @@ http://localhost:8080/childAlert?address=<address>
 This URL should return a list of children (anyone under the age of 18) at that address. The list should 
 include the first and last name of each child, the child’s age, and a list of other persons living at that 
 address. If there are no children at the address, then this URL can return an empty string. 
+
 http://localhost:8080/childAlert?address=1509%20Culver%20St
 
 http://localhost:8080/childAlert?address=947%20E.%20Rose%20Dr
@@ -78,6 +79,7 @@ http://localhost:8080/flood/stations?stations=<a list of station_numbers>
 This should return a list of all the households in each fire station’s jurisdiction. This list needs to group 
 people by household address, include name, phone number, and age of each person, and  any 
 medications (with dosages) and allergies beside each person’s name.  
+
 http://localhost:8080/flood/stations?stations=1
 
 http://localhost:8080/flood/stations?stations=1,2
@@ -103,6 +105,7 @@ http://localhost:8080/personInfo?firstName=John&lastName=Carman
 http://localhost:8080/communityEmail?city=<city> 
 
 This will return the email addresses of all of the people in the city.
+
 http://localhost:8080/communityEmail?city=Culver
 
 http://localhost:8080/communityEmail?city=Cooper
@@ -111,6 +114,7 @@ http://localhost:8080/communityEmail?city=New%20York
 
 <city> returns empty array if city not in database
 
+```mermaid
 sequenceDiagram
     participant User
     participant Controller as SafetyNetController
@@ -128,13 +132,13 @@ sequenceDiagram
     Repository-->>Service: List<Person>
     Service-->>Controller: Map (persons, adults, children)
     Controller-->>User: JSON response
-
+```
 - **Data Models**:
   - `Person`: Represents an individual with attributes like name, address, and medical record.
   - `FireStation`: Maps addresses to fire station numbers.
   - `MedicalRecord`: Stores medical history, medications, and allergies.
 
-
+```mermaid
 classDiagram
     class FireStation {
         String station
@@ -160,7 +164,7 @@ classDiagram
 
     FireStation "1" -- "*" Person : covers
     Person "1" -- "1" MedicalRecord : has
-
+```
 
 ## 4. Non-Functional Requirements
 - **Performance**: Handle requests for large datasets efficiently.
