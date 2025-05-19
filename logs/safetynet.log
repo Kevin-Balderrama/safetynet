@@ -662,3 +662,21 @@
 2025-05-18T23:31:52.728-04:00  INFO 45592 --- [safetynet] [main] c.o.s.c.SafetyNetControllerTest          : Started SafetyNetControllerTest in 1.934 seconds (process running for 3.276)
 2025-05-18T23:31:53.792-04:00  INFO 45592 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching emails by city: NewYork
 2025-05-18T23:31:53.794-04:00  WARN 45592 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : No data found for city: NewYork
+2025-05-18T23:35:19.018-04:00  INFO 73816 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.12 with PID 73816 (C:\Users\BlueBird\Documents\OpenClassrooms\safetynet\target\classes started by BlueBird in C:\Users\BlueBird\Documents\OpenClassrooms\safetynet)
+2025-05-18T23:35:19.022-04:00  INFO 73816 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-05-18T23:35:19.103-04:00  INFO 73816 --- [safetynet] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-05-18T23:35:19.103-04:00  INFO 73816 --- [safetynet] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-05-18T23:35:21.300-04:00  INFO 73816 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-18T23:35:21.320-04:00  INFO 73816 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-18T23:35:21.321-04:00  INFO 73816 --- [safetynet] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-18T23:35:21.387-04:00  INFO 73816 --- [safetynet] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-18T23:35:21.388-04:00  INFO 73816 --- [safetynet] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2284 ms
+2025-05-18T23:35:22.619-04:00  INFO 73816 --- [safetynet] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-05-18T23:35:22.633-04:00  INFO 73816 --- [safetynet] [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoints beneath base path '/actuator'
+2025-05-18T23:35:22.788-04:00  INFO 73816 --- [safetynet] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-18T23:35:22.818-04:00  INFO 73816 --- [safetynet] [restartedMain] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 4.407 seconds (process running for 5.247)
+2025-05-18T23:35:24.392-04:00  INFO 73816 --- [safetynet] [RMI TCP Connection(2)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-18T23:35:24.392-04:00  INFO 73816 --- [safetynet] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-18T23:35:24.393-04:00  INFO 73816 --- [safetynet] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-05-18T23:35:30.275-04:00  INFO 73816 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.SafetyNetController     : Fetching children by address: 1509 Culver St
+2025-05-18T23:35:30.281-04:00  INFO 73816 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.SafetyNetController     : Data found for address: 1509 Culver St
