@@ -14,14 +14,15 @@ class SafetyNetControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-/*
+
     @Test
     void testGetPersonsByStation() throws Exception {
-        mockMvc.perform(get("/firestation").param("stationNumber", "-1"))
+        mockMvc.perform(get("/firestation").param("stationNumber", "1"))
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$.persons").isArray());
+               .andExpect(jsonPath("$.persons").isArray())
+               .andExpect(jsonPath("$.persons[0].firstName").value("Peter")); // Validate first person in the array;
     }
-*/
+
     @Test
     void testGetPersonsByStation_InvalidStationNumber() throws Exception {
         mockMvc.perform(get("/firestation").param("stationNumber", "999")) // Non-existent station
@@ -106,18 +107,18 @@ class SafetyNetControllerTest {
                .andExpect(status().isOk())
                .andExpect(jsonPath("$").isArray());
     }
-/* 
+ 
     @Test
     void testGetEmailsByCity_EmptyCity() throws Exception {
         mockMvc.perform(get("/communityEmail").param("city", "")) // Empty city parameter
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$").isEmpty()); // Expecting an empty array
+               .andExpect(jsonPath("$").value("No data found for the given city.")); // Expecting an empty array
     }
 
     @Test
     void testGetEmailsByCity_InvalidCity() throws Exception {
-        mockMvc.perform(get("/communityEmail").param("city", "Unknown City")) // Non-existent city
+        mockMvc.perform(get("/communityEmail").param("city", "NewYork")) // Non-existent city
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$").isEmpty()); // Expecting an empty array
-    }*/
+               .andExpect(jsonPath("$").value("No data found for the given city.")); // Expecting an empty array
+    }
 }
