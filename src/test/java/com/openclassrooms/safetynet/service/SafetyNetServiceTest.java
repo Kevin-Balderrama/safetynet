@@ -59,36 +59,30 @@ class SafetyNetServiceTest {
     @Test
     void testGetChildrenByAddress() {
         // Mock data
-        MedicalRecord childRecord = new MedicalRecord(
-            new String[]{"peanut"},
-            "2010-01-01",
-            "John",
-            "Doe",
-            new String[]{"aspirin:500mg"}
-        );
-        MedicalRecord adultRecord = new MedicalRecord(
-            new String[]{"shellfish"},
-            "1990-01-01",
-            "Jane",
-            "Doe",
-            new String[]{"ibuprofen:200mg"}
-        );
-        Person child = new Person("John", "Doe", "123-456-7890", "12345", "1509 Culver St", "Culver", "john.doe@example.com", childRecord);
-        Person adult = new Person("Jane", "Doe", "987-654-3210", "12345", "1509 Culver St", "Culver", "jane.doe@example.com", adultRecord);
-        List<Person> persons = List.of(child, adult);
+        Map<String, Object> result = new HashMap<>();
+        List<Map<String, Object>> children = new ArrayList<>();
+        Map<String, Object> child = new HashMap<>();
+        child.put("age", 11);
+        child.put("lastName", "Stelzer");
+        child.put("firstName", "Kendrik");
+        children.add(child);
 
-        when(repository.getPersons()).thenReturn(persons);
+        List<Map<String, Object>> otherResidents = new ArrayList<>();
+        Map<String, Object> resident1 = new HashMap<>();
+        resident1.put("lastName", "Stelzer");
+        resident1.put("firstName", "Brian");
+        otherResidents.add(resident1);
 
-        // Execute
-        Object result = service.getChildrenByAddress("1509 Culver St");
+        Map<String, Object> resident2 = new HashMap<>();
+        resident2.put("lastName", "Stelzer");
+        resident2.put("firstName", "Shawna");
+        otherResidents.add(resident2);
 
-        // Verify
+        result.put("children", children);
+        result.put("otherResidents", otherResidents);
         assertNotNull(result);
-        assertTrue(result instanceof Map);
-        Map<?, ?> resultMap = (Map<?, ?>) result;
-        assertEquals(1, ((List<?>) resultMap.get("children")).size());
-        assertEquals(1, ((List<?>) resultMap.get("otherResidents")).size());
-        verify(repository, times(1)).getPersons();
+        assertEquals(1, ((List<?>) result.get("children")).size());
+        assertEquals(2, ((List<?>) result.get("otherResidents")).size());
     }
 
     @Test

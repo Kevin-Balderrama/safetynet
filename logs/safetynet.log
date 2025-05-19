@@ -680,3 +680,47 @@
 2025-05-18T23:35:24.393-04:00  INFO 73816 --- [safetynet] [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2025-05-18T23:35:30.275-04:00  INFO 73816 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.SafetyNetController     : Fetching children by address: 1509 Culver St
 2025-05-18T23:35:30.281-04:00  INFO 73816 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.SafetyNetController     : Data found for address: 1509 Culver St
+2025-05-18T23:40:21.355-04:00  INFO 73816 --- [safetynet] [http-nio-8080-exec-5] c.o.s.controller.SafetyNetController     : Fetching children by address: 947 E. Rose Dr
+2025-05-18T23:40:21.356-04:00  INFO 73816 --- [safetynet] [http-nio-8080-exec-5] c.o.s.controller.SafetyNetController     : Data found for address: 947 E. Rose Dr
+2025-05-19T00:39:19.102-04:00  INFO 26152 --- [safetynet] [main] c.o.safetynet.SafetynetApplicationTest   : Starting SafetynetApplicationTest using Java 17.0.12 with PID 26152 (started by BlueBird in C:\Users\BlueBird\Documents\OpenClassrooms\safetynet)
+2025-05-19T00:39:19.120-04:00  INFO 26152 --- [safetynet] [main] c.o.safetynet.SafetynetApplicationTest   : No active profile set, falling back to 1 default profile: "default"
+2025-05-19T00:39:22.018-04:00  INFO 26152 --- [safetynet] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoints beneath base path '/actuator'
+2025-05-19T00:39:22.152-04:00  INFO 26152 --- [safetynet] [main] c.o.safetynet.SafetynetApplicationTest   : Started SafetynetApplicationTest in 3.542 seconds (process running for 5.046)
+2025-05-19T00:39:24.257-04:00  INFO 26152 --- [safetynet] [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.openclassrooms.safetynet.controller.SafetyNetControllerTest]: SafetyNetControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2025-05-19T00:39:24.378-04:00  INFO 26152 --- [safetynet] [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.openclassrooms.safetynet.SafetynetApplication for test class com.openclassrooms.safetynet.controller.SafetyNetControllerTest
+2025-05-19T00:39:24.389-04:00  INFO 26152 --- [safetynet] [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2025-05-19T00:39:24.478-04:00  INFO 26152 --- [safetynet] [main] c.o.s.c.SafetyNetControllerTest          : Starting SafetyNetControllerTest using Java 17.0.12 with PID 26152 (started by BlueBird in C:\Users\BlueBird\Documents\OpenClassrooms\safetynet)
+2025-05-19T00:39:24.479-04:00  INFO 26152 --- [safetynet] [main] c.o.s.c.SafetyNetControllerTest          : No active profile set, falling back to 1 default profile: "default"
+2025-05-19T00:39:25.048-04:00  INFO 26152 --- [safetynet] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-05-19T00:39:25.049-04:00  INFO 26152 --- [safetynet] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-05-19T00:39:25.051-04:00  INFO 26152 --- [safetynet] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-05-19T00:39:25.082-04:00  INFO 26152 --- [safetynet] [main] c.o.s.c.SafetyNetControllerTest          : Started SafetyNetControllerTest in 0.694 seconds (process running for 7.978)
+2025-05-19T00:39:25.278-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching emails by city: NewYork
+2025-05-19T00:39:25.280-04:00  WARN 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : No data found for city: NewYork
+2025-05-19T00:39:25.629-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching person info for: John Doe
+2025-05-19T00:39:25.629-04:00  WARN 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : No data found for person: John Doe
+2025-05-19T00:39:25.662-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching children by address: 1509 Culver St
+2025-05-19T00:39:25.666-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Data found for address: 1509 Culver St
+2025-05-19T00:39:25.690-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching person info for: John Doe
+2025-05-19T00:39:25.691-04:00  WARN 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : No data found for person: John Doe
+2025-05-19T00:39:25.711-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching flood data for stations: [1, 2]
+2025-05-19T00:39:25.713-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Data found for stations: [1, 2]
+2025-05-19T00:39:25.775-04:00  WARN 26152 --- [safetynet] [main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'stationNumber' for method parameter type int is not present]
+2025-05-19T00:39:25.784-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching fire data by address: Unknown Address
+2025-05-19T00:39:25.785-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Data found for address: Unknown Address
+2025-05-19T00:39:25.800-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching phones by firestation: 2
+2025-05-19T00:39:25.802-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Phone number(s) found for firestation: 2
+2025-05-19T00:39:25.812-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching children by address: Unknown Address
+2025-05-19T00:39:25.813-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Data found for address: Unknown Address
+2025-05-19T00:39:25.824-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching emails by city: 
+2025-05-19T00:39:25.825-04:00  WARN 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : No data found for city: 
+2025-05-19T00:39:25.833-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching flood data for stations: [999]
+2025-05-19T00:39:25.834-04:00  WARN 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : No data found for stations: [999]
+2025-05-19T00:39:25.848-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching emails by city: Culver
+2025-05-19T00:39:25.848-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Email(s) found for city: Culver
+2025-05-19T00:39:25.858-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching fire data by address: 1509%20Culver%20St
+2025-05-19T00:39:25.858-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Data found for address: 1509%20Culver%20St
+2025-05-19T00:39:25.869-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching persons by station number: 999
+2025-05-19T00:39:25.870-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Data found for station number: 999
+2025-05-19T00:39:25.883-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Fetching persons by station number: 1
+2025-05-19T00:39:25.884-04:00  INFO 26152 --- [safetynet] [main] c.o.s.controller.SafetyNetController     : Data found for station number: 1
